@@ -30,7 +30,7 @@ public class MainActivity extends BaseActivity {
         return true;
     }
 
-    public void onDilaogItemClick(View view) {
+    public void onDialogItemClick(View view) {
         if (dialog != null)
             dialog.cancel();
         switch (view.getId()) {
