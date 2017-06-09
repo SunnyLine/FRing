@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">FCircle</string>
     <string name="camera">拍照或录像</string>
+    <string name="album">图片和视频</string>
 </resources>

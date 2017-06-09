@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="home_head_height">180dp</dimen>
+    <dimen name="home_photo_height">70dp</dimen>
+    <dimen name="home_half_photo_height">30dp</dimen>
+    <dimen name="mul_padding">16dp</dimen>
+</resources>

@@ -1,6 +1,7 @@
 package com.pullein.circle.activity;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.MenuRes;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ public class BaseActivity extends AppCompatActivity implements Toolbar.OnMenuIte
     private
     @MenuRes
     int mMenuRes = -1;
+    private boolean isTitleBar = true;
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
@@ -37,11 +39,21 @@ public class BaseActivity extends AppCompatActivity implements Toolbar.OnMenuIte
 
     @Override
     public void setContentView(View view, ViewGroup.LayoutParams params) {
-        getDelegate().setContentView(R.layout.activity_parent);
+        getDelegate().setContentView(isTitleBar ? LayoutInflater.from(this).inflate(R.layout.activity_parent, null) : view);
         LinearLayout parent = (LinearLayout) findViewById(R.id.parent);
+        if (parent == null) return;
         if (params != null)
             view.setLayoutParams(params);
         parent.addView(view);
+    }
+
+
+    protected  <T extends View> T getView(@IdRes int id) {
+        return (T) findViewById(id);
+    }
+
+    public void setTitleBar(boolean titleBar) {
+        isTitleBar = titleBar;
     }
 
     @Override
@@ -54,8 +66,8 @@ public class BaseActivity extends AppCompatActivity implements Toolbar.OnMenuIte
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             toolbar.setNavigationIcon(R.drawable.ic_action_back);
-            toolbar.setTitle(R.string.app_name);
             setSupportActionBar(toolbar);
+            toolbar.setNavigationOnClickListener(v -> finish());
             toolbar.setOnMenuItemClickListener(this);
         }
     }

@@ -1,20 +1,28 @@
-package com.pullein.circle;
+package com.pullein.circle.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import com.pullein.circle.R;
 import com.pullein.circle.activity.BaseActivity;
+import com.pullein.circle.album.AlbumActivity;
+import com.pullein.circle.camera.CameraActivity;
 
 public class MainActivity extends BaseActivity {
+
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setMenuRes(R.menu.main);
+        recyclerView = getView(R.id.recyclerView);
     }
 
     AlertDialog dialog;
@@ -31,14 +39,14 @@ public class MainActivity extends BaseActivity {
     }
 
     public void onDialogItemClick(View view) {
-        if (dialog != null)
+        if (dialog != null && dialog.isShowing())
             dialog.cancel();
         switch (view.getId()) {
-            case R.id.openAlum:
-                Toast.makeText(this, "1111", Toast.LENGTH_SHORT).show();
+            case R.id.openAlbum:
+                startActivity(new Intent(this, AlbumActivity.class));
                 break;
             case R.id.openCamera:
-                Toast.makeText(this, "2222", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, CameraActivity.class));
                 break;
         }
     }
